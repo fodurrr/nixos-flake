@@ -1,5 +1,8 @@
 # NixOs Flake setup
 
+> This flake setup based on [Ruixi-rebirth](https://github.com/Ruixi-rebirth/flakes) works. All credit goes to him/her.
+
+
 These steps are for a fresh installation. Not dual boot
 
 ## Partitioning the disk
