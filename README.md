@@ -53,7 +53,7 @@ nixos-generate-config --root /mnt
 
 ```bash
 nix-shell -p git
-git clone https://github.com/fodurrr/nixos-flakes.git /mnt/etc/nixos/Flakes 
+git clone https://github.com/fodurrr/nixos-flake.git /mnt/etc/nixos/Flakes 
 
 cd /mnt/etc/nixos/Flakes/
 
