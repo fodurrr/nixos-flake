@@ -14,6 +14,8 @@ cd nixos-flake
 
 nix develop --extra-experimental-features nix-command --extra-experimental-features flakes
 
+nix flake update # Update flake lock
+
 sudo nixos-rebuild switch --flake .#laptop
 ```
 
