@@ -10,16 +10,25 @@
       ../../../modules/desktop/hyprland
     ];
 
-  users.users.root.initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "ch";
+    xkbVariant = "";
+  };
+
+  # Configure console keymap
+  console.keyMap = "sg";
+
+  #users.users.root.initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
   users.users.${user} = {
-    initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
+    #initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
     # shell = pkgs.fish;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" ];
     packages = (with pkgs; [
-      # chatgpt-cli
+      # ...
     ]) ++ (with config.nur.repos;[
-      # linyinfeng.icalingua-plus-plus
+      # ...
     ]);
   };
   boot = {
@@ -32,7 +41,7 @@
       };
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
+        efiSysMountPoint = "/boot/efi";
       };
       timeout = 3;
     };
@@ -45,10 +54,10 @@
     initrd.verbose = false;
   };
 
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-rime fcitx5-chinese-addons fcitx5-table-extra fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki ];
-  };
+  # i18n.inputMethod = {
+  #   enabled = "fcitx5";
+  #   fcitx5.addons = with pkgs; [ fcitx5-rime fcitx5-chinese-addons fcitx5-table-extra fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki ];
+  # };
 
   environment = {
     systemPackages = with pkgs; [

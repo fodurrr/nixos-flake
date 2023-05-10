@@ -1,16 +1,39 @@
+# This is basicly the same as the default configuration.nix file
+# but only those options are included here which are common for all hosts.
+
 { config, pkgs, lib, inputs, user, ... }:
 
 {
   nixpkgs.system = "x86_64-linux";
 
   networking = {
-    hostName = "nixos"; # Define your hostname.
+    hostName = "hp-laptop-nixos"; # Define your hostname.
     networkmanager.enable = true;
   };
-  time.timeZone = "Asia/Shanghai";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  # Boot options are defined in the hosts (ex.in the laptop/wayland/default.nix file)
 
+
+  # Set your time zone.
+  time.timeZone = "Europe/London";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_GB.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_GB.UTF-8";
+    LC_IDENTIFICATION = "en_GB.UTF-8";
+    LC_MEASUREMENT = "en_GB.UTF-8";
+    LC_MONETARY = "en_GB.UTF-8";
+    LC_NAME = "en_GB.UTF-8";
+    LC_NUMERIC = "en_GB.UTF-8";
+    LC_PAPER = "en_GB.UTF-8";
+    LC_TELEPHONE = "en_GB.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
+  };
+
+
+  
   security.rtkit.enable = true;
   services = {
     openssh = {
@@ -35,16 +58,12 @@
 
   nix = {
     settings = {
-      # substituters = [
-      #   "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-      #   "https://cache.nixos.org/"
-      # ];
       auto-optimise-store = true; # Optimise syslinks
     };
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 2d";
+      options = "--delete-older-than 3d";
     };
     package = pkgs.nixVersions.unstable;
     registry.nixpkgs.flake = inputs.nixpkgs;
@@ -61,6 +80,6 @@
       enable = false;
       channel = "https://nixos.org/channels/nixos-unstable";
     };
-    stateVersion = "22.11";
+    stateVersion = "23.05";
   };
 }
