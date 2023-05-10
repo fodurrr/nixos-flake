@@ -3,9 +3,27 @@
 > This flake setup based on [Ruixi-rebirth](https://github.com/Ruixi-rebirth/flakes) works. All credit goes to him/her.
 
 
-These steps are for a fresh installation. Not dual boot
+## Simple clone and install if you have already NixOs installed
 
-## Partitioning the disk
+```bash	
+nix-shell -p git
+
+git clone https://github.com/fodurrr/nixos-flake.git
+
+cd nixos-flake
+
+nix develop --extra-experimental-features nix-command --extra-experimental-features flakes
+
+sudo nixos-rebuild switch --flake .#laptop
+```
+
+## Fresh installation. Not dual boot
+
+Prepare and boot into a 64-bit nixos [minimal iso image](https://channels.nixos.org/?prefix=nixos-unstable/latest-nixos-minimal-x86_64-linux.iso).
+Currently this is version 23.05
+
+
+### Partitioning the disk
 
 You have to be root to use parted. You can use `sudo` or `sudo su -` to become root
 
@@ -26,7 +44,7 @@ mkswap -L swap /dev/sdc2
 mkfs.fat -F 32 -n boot /dev/sdc3
 ```
 
-## Mounting the drives
+### Mounting the drives
 
 ```bash
 # Mount the partitions
@@ -40,42 +58,30 @@ mount /dev/disk/by-label/boot /mnt/boot
 swapon /dev/sdc2
 ```
 
-## Prepare the installation ISO 
-
-Prepare a 64-bit nixos [minimal iso image](https://channels.nixos.org/nixos-22.11/latest-nixos-minimal-x86_64-linux.iso) 
-
-## Generate a basic configuration 
+### Generate a basic NixOS configuration files 
 
 ```bash
 nixos-generate-config --root /mnt
 ```
-## Clone the repository locally 
+
+### Clone and install NixOS via flake.
 
 ```bash
+# Start a new shell with git
 nix-shell -p git
 git clone https://github.com/fodurrr/nixos-flake.git /mnt/etc/nixos/Flakes 
 
 cd /mnt/etc/nixos/Flakes/
 
+# Start a new shell with flakes environment
 nix develop --extra-experimental-features nix-command --extra-experimental-features flakes 
 
-# copy `hardware-configuration.nix` from /mnt/etc/nixos to /mnt/etc/nixos/Flakes/hosts/laptop/hardware-configuration.nix
-
 cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/Flakes/hosts/laptop/hardware-configuration.nix
-```
-9. Select Window Manager
 
-10. Select a theme 
-
-11. Perform install
-```bash
 nixos-install --no-root-passwd --flake .#laptop
-```
 
-12. Reboot 
-```bash
 reboot
 ```
 
-13. Enjoy it!
+### Enjoy it!
 
