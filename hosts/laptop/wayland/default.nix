@@ -20,6 +20,7 @@
   console.keyMap = "sg";
 
   #users.users.root.initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
+  
   users.users.${user} = {
     #initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
     # shell = pkgs.fish;
@@ -46,11 +47,11 @@
       timeout = 3;
     };
     kernelParams = [
-      "quiet"
-      "splash"
+      #"quiet"
+      #"splash"
       # "nvidia-drm.modeset=1"
     ];
-    consoleLogLevel = 0;
+    consoleLogLevel = 1;
     initrd.verbose = false;
   };
 
@@ -81,7 +82,7 @@
 
   services = {
     dbus.packages = [ pkgs.gcr ];
-    #getty.autologinUser = "${user}";
+    getty.autologinUser = "${user}";
     gvfs.enable = true;
     pipewire = {
       enable = true;
