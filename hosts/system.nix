@@ -7,7 +7,7 @@
   nixpkgs.system = "x86_64-linux";
 
   networking = {
-    hostName = "hp-laptop-nixos"; # Define your hostname.
+    hostName = "nixos"; # Define your hostname.
     networkmanager.enable = true;
   };
 
@@ -45,6 +45,8 @@
     shells = with pkgs; [ fish ];
     systemPackages = with pkgs; [
       git
+      gh
+      vscode
       neovim
       wget
       neofetch
@@ -63,7 +65,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 3d";
+      options = "--delete-older-than 5d";
     };
     package = pkgs.nixVersions.unstable;
     registry.nixpkgs.flake = inputs.nixpkgs;
