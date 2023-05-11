@@ -1,29 +1,13 @@
+# NOT WORKING YET!!! WIP !!!! DO NOT USE YET!!!
+
 # NixOs Flake setup
 
 > This flake setup based on [Ruixi-rebirth](https://github.com/Ruixi-rebirth/flakes) works. All credit goes to him/her.
-
-
-## Simple clone and install if you have already NixOs installed
-
-```bash	
-nix-shell -p git
-
-git clone https://github.com/fodurrr/nixos-flake.git
-
-cd nixos-flake
-
-nix develop --extra-experimental-features nix-command --extra-experimental-features flakes
-
-nix flake update # Update flake lock
-
-sudo nixos-rebuild switch --flake .#laptop
-```
 
 ## Fresh installation. Not dual boot
 
 Prepare and boot into a 64-bit nixos [minimal iso image](https://channels.nixos.org/?prefix=nixos-unstable/latest-nixos-minimal-x86_64-linux.iso).
 Currently this is version 23.05
-
 
 ### Partitioning the disk
 
@@ -32,8 +16,8 @@ You have to be root to use parted. You can use `sudo` or `sudo su -` to become r
 ```bash
 # Create partition tables
 parted /dev/sdc mklabel gpt # or 'msdos' for legacy boot
-parted /dev/sdc -- mkpart primary 1MiB -8GiB (512MiB -8GiB for uefi)
-parted /dev/sdc -- mkpart primary linux-swap -8GiB 100%
+parted /dev/sdc -- mkpart primary 512MiB -8GiB # for uefi, 1MiB for msdod
+parted /dev/sdc -- mkpart primary linux-swap -8GiB 100% 
 
 # Extra partitions for UEFI
 parted /dev/sdc -- mkpart ESP fat32 1Mib 512MiB
@@ -60,7 +44,7 @@ mount /dev/disk/by-label/boot /mnt/boot
 swapon /dev/sdc2
 ```
 
-### Generate a basic NixOS configuration files 
+### Generate basic NixOS configuration files 
 
 ```bash
 nixos-generate-config --root /mnt
@@ -75,7 +59,7 @@ git clone https://github.com/fodurrr/nixos-flake.git /mnt/etc/nixos/Flakes
 
 cd /mnt/etc/nixos/Flakes/
 
-# Start a new shell with flakes environment
+# Start a new environment with flakes
 nix develop --extra-experimental-features nix-command --extra-experimental-features flakes 
 
 cp /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/Flakes/hosts/laptop/hardware-configuration.nix
@@ -86,4 +70,21 @@ reboot
 ```
 
 ### Enjoy it!
+
+## Simple clone and update if you have already installed it before.
+
+```bash	
+nix-shell -p git
+
+git clone https://github.com/fodurrr/nixos-flake.git
+
+cd nixos-flake
+
+# nix develop --extra-experimental-features nix-command --extra-experimental-features flakes
+
+# nix flake update # Update flake lock
+
+sudo nixos-rebuild switch --flake .#laptop
+```
+
 
