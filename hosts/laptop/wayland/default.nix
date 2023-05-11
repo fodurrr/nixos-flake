@@ -11,10 +11,10 @@
     ];
 
   # Configure keymap in X11
-  services.xserver = {
-    layout = "ch";
-    xkbVariant = "";
-  };
+  #services.xserver = {
+  #  layout = "ch";
+  #  xkbVariant = "";
+  #};
 
   # Configure console keymap
   console.keyMap = "sg";
@@ -23,6 +23,7 @@
   
   users.users.${user} = {
     #initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
+    initialPassword= "password";
     # shell = pkgs.fish;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" ];
