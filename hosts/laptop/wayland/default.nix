@@ -19,11 +19,11 @@
   # Configure console keymap
   console.keyMap = "sg";
 
-  #users.users.root.initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
+  users.users.root.initialHashedPassword = "$6$Ti9zQLSyMnszxtTy$lkMj2Ti6YE.zm8v.LTKLsKY6N4jx4tXDLxnwuvxFwNNZj5OvhHAGZJm1Vq7AN1/CQ6iKEcDK6sOe2Tir9ixrZ.";
   
   users.users.${user} = {
-    #initialHashedPassword = "$6$bxcw7rtt$gxhJo1QepAxJyzIQU7XpZVKrH./Ha1Q8rlzt9HR/lbb4QVww6DWX2AKSIiRAJdmU2RptKn1b62R2Rk5ZbPIjv/";
-    initialPassword= "password";
+    initialHashedPassword = "$6$3F3yB1VxdfpyOV3y$bnuCLi.puScJ5.arHf3rRhrHqOLkLMLAvstmSsgSntY2M7NmIYsX6w7o24ddKEvLNFiw0WN5qky2xcjgsbHxn0";
+    #initialPassword= "password";
     # shell = pkgs.fish;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" ];
